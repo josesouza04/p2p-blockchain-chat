@@ -242,7 +242,8 @@ class P2PNode:
         else:
             print(f"Total de mensagens na blockchain: {len(messages_copy)}\n")
             for i, msg in enumerate(messages_copy):
-                text = msg.text.decode('ascii', errors='ignore')
+
+                text = msg.text.decode('ascii', errors='replace')
                 md5_hex = msg.md5.hex()
                 
                 print(f"--- Mensagem {i} ---")
@@ -250,6 +251,7 @@ class P2PNode:
                 print(f"  Hash : {md5_hex}")
         
         print("="*60 + "\n")
+
 
     def print_peers(self):
         """Imprime a lista de pares conhecidos."""
