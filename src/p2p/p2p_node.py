@@ -60,6 +60,8 @@ class P2PNode:
             
             self.peers.add(peer_ip)
             self.active_connections.add(peer_ip)
+            conn.sendall(struct.pack("!B", PEER_REQUEST))
+
         try:
             while True:
                 msg_type_byte = recv_all(conn, 1)
