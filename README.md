@@ -14,9 +14,7 @@ A arquitetura segue o padrão peer-to-peer, onde os nós descobrem uns aos outro
 
 Requisitos:
 
-- Python 3.8+
-- Sistema Linux (testado no Ubuntu)
-- Porta `51511` liberada no firewall
+- Python
 
 ### Instruções
 
