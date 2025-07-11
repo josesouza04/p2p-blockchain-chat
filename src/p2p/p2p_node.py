@@ -47,7 +47,7 @@ class P2PNode:
 
         while True:
             conn, addr = server.accept()
-            print(f"Conexão aceita de {addr[0]}")
+            print("Nova conexão estabelecida, cheque sua lista de conexões!")
             threading.Thread(target=self.handle_peer, args=(conn, addr), daemon=True).start()
     
     def handle_peer(self, conn, addr):
@@ -79,9 +79,6 @@ class P2PNode:
                 elif msg_type == ARCHIVE_RESPONSE:
                     print(f"[{peer_ip}] => ArchiveResponse recebido")
                     self.handle_archive_response(conn)
-                else:
-                    print(f"[{peer_ip}] Mensagem desconhecida: {msg_type}")
-                    break 
         except (ConnectionError, struct.error) as e:
             print(f"Conexão com {peer_ip} perdida: {e}")
         finally:
@@ -124,7 +121,7 @@ class P2PNode:
                 return
         
         try:
-            print(f">> Tentando conectar ao par {peer_ip}...")
+            print(f"Tentando conectar ao peer {peer_ip}...")
             sock = socket.create_connection((peer_ip, PORT), timeout=5)
             
             sock.settimeout(None) 
@@ -142,14 +139,11 @@ class P2PNode:
 
     def send_periodic_peer_requests(self):
         while True:
-            time.sleep(10)
+            time.sleep(5)
             
             with self.lock:
                 other_peers = self.peers - {self.ip}  
                 peers_to_check = list(other_peers - self.active_connections)
-
-            if peers_to_check:
-                print(f"Verificando conexões com {len(peers_to_check)} pares inativos: {peers_to_check}")
             
             for peer_ip in peers_to_check:
                 self.connect_to_peer(peer_ip)
@@ -256,7 +250,6 @@ class P2PNode:
 
 
     def print_peers(self):
-        """Imprime a lista de pares conhecidos."""
         print("\n" + "-"*30)
         print(" Pares Conhecidos na Rede")
         print("-"*30)

@@ -28,7 +28,7 @@ class ChatMessage:
         n = struct.unpack("!B", data[0:1])[0]
         
         if len(data) < 1 + n + 32:
-            raise ValueError("Dados insuficientes para o payload completo da mensagem.")
+            raise ValueError("Dados insuficientes para o payload da mensagem.")
 
         text_bytes = data[1:1 + n]
         

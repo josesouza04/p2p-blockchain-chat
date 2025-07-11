@@ -33,7 +33,7 @@ class ChatHistory:
     def _check_md5(self, msgs):
         last = msgs[-1]
         data = b''.join([m.serialize() for m in msgs[-20:]])
-        data = data[:-16]  # remove last MD5
+        data = data[:-16] 
 
         h = hashlib.md5(data).digest()
         return h[:2] == b'\x00\x00' and h == last.md5

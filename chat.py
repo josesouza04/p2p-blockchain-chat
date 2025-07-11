@@ -4,19 +4,19 @@ from src.p2p.p2p_node import P2PNode
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("Uso: python seu_arquivo.py <meu_ip> [ip_par_conhecido]")
+        print("Uso: python chat.py <ip_local> [ip_conhecido]")
         sys.exit(1)
 
-    my_ip = sys.argv[1]
+    ip_local = sys.argv[1]
     known_peer = sys.argv[2] if len(sys.argv) > 2 else None
 
-    node = P2PNode(my_ip, known_peer)
+    node = P2PNode(ip_local, known_peer)
     node.start()
     time.sleep(1)
 
-    print("\n>>> Cliente P2P Blockchain Chat iniciado <<<")
-    print("Digite uma mensagem para minerar e enviar para a rede.")
-    print("Comandos disponíveis:")
+    print("\n___P2P Blockchain Chat iniciado___")
+    print("Digite uma mensagem para enviar para a rede.")
+    print("Comandos auxiliares:")
     print("  /history -> Para ver o histórico de mensagens.")
     print("  /peers   -> Para ver a lista de pares conhecidos.")
     print("Use Ctrl+C para sair.\n")
